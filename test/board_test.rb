@@ -15,4 +15,9 @@ class BoardTest < Minitest::Test
   def test_it_exists
     assert_instance_of Board, @board
   end
+
+  def test_board_has_cells
+    skip
+    assert_instance_of Hash, @board.cells
+  end
 end
