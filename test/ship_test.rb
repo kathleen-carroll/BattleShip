@@ -1,15 +1,8 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/ship"
-<<<<<<< HEAD
-require 'pry'
-
+ 
 class ShipTest < Minitest::Test
-
-=======
-
-class ShipTest < Minitest::Test
->>>>>>> 9a034cad6ea1587b276122e5ca1462fd9ce15678
   def setup
     @cruiser = Ship.new("Cruiser", 3)
   end
