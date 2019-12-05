@@ -33,4 +33,11 @@ class Board
     cells
   end
 
+  def validate_coordinate?(coordinate)
+    if cells[coordinate] == nil
+      false
+    else true
+    end
+  end
+
 end
