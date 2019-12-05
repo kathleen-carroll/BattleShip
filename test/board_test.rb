@@ -1,15 +1,16 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/board"
-#require "./lib/ship"
+require "./lib/ship"
 #require "./lib/cell"
 
 class BoardTest < Minitest::Test
   def setup
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
     # @cell_1 = Cell.new("B4")
     # @cell_2 = Cell.new("C3")
-    # @cruiser = Ship.new("Cruiser", 3)
   end
 
   def test_it_exists
