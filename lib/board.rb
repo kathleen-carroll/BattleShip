@@ -124,7 +124,6 @@ class Board
 
     counter.each do |count|
       next_val = count + 1
-      #require "pry"; binding.pry
         return @consecutive_letters if next_val == coordinates.length
         return @consecutive_letters = false if letters[count] + 1 != letters[next_val]
         @consecutive_letters = true if letters[count] + 1 == letters[next_val]
@@ -133,8 +132,8 @@ class Board
     @consecutive_letters
   end
 
-  # def valid_placement?(ship, coordinates)
-  #   if ship.length == coordinates.length
+  def valid_placement?(ship, coordinates)
+    if ship.length == coordinates.length
   #     letters = []
   #     numbers = []
   #     coordinates.each do |coordinate|
@@ -160,8 +159,8 @@ class Board
   #       end
   #     end
   #     #if letters[counter] == letters[counter]
-  #   else false
-  #   end
-  # end
+    else false
+    end
+  end
 
 end
