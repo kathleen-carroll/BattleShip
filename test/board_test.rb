@@ -30,11 +30,20 @@ class BoardTest < Minitest::Test
   end
 
   def test_placement_is_length_of_ship
+    skip
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 
+  def test_coordinate_numbers_are_consecutive
+    assert_equal false, @board.consecutive_numbers?(@cruiser, ["A1", "A2", "A4"])
+    assert_equal true, @board.consecutive_numbers?(@cruiser, ["A2", "A3", "A4"])
+    assert_equal false, @board.consecutive_numbers?(@cruiser, ["A1", "B1", "C1"])
+    assert_equal true, @board.consecutive_numbers?(@cruiser, ["A2", "B4", "C3"])
+  end
+
   def test_coordinate_letters_are_consecutive
+    skip
     assert_equal true, @board.consecutive_letters?(@cruiser, ["A1", "A2", "A4"])
   end
 
