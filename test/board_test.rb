@@ -35,6 +35,15 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 
+  def test_coordinate_numbers_are_the_same
+    assert_equal true, @board.same_numbers?(@cruiser, ["C4", "B4", "A4"])
+    assert_equal false, @board.same_numbers?(@cruiser, ["A2", "B2", "D4"])
+    assert_equal false, @board.same_numbers?(@cruiser, ["A2", "C1", "B1"])
+    assert_equal true, @board.same_numbers?(@cruiser, ["A1", "D1", "B1"])
+    assert_equal true, @board.same_numbers?(@cruiser, ["A1", "D2", "B3"])
+  end
+
+
   def test_coordinate_letters_are_the_same
     assert_equal true, @board.same_letters?(@cruiser, ["A1", "A2", "A4"])
     assert_equal false, @board.same_letters?(@cruiser, ["A1", "B2", "C4"])
