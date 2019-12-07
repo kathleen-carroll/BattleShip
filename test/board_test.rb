@@ -43,7 +43,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_coordinate_letters_are_consecutive
-    skip
     assert_equal true, @board.consecutive_letters?(@cruiser, ["A1", "A2", "A4"])
   end
 
