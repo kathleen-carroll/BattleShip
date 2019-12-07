@@ -5,7 +5,7 @@ class Board
 
   def initialize
     @cells = cell_generator
-    @consecutive_letters = false
+    #@consecutive_letters = false
   end
 
   def cell_generator
@@ -41,33 +41,55 @@ class Board
     end
   end
 
-  def consecutive_letters?(ship, coordinates)
-    letters = coordinates.map do |coordinate|
-      coordinate[0] end
+  def consecutive_numbers?(ship, coordinates)
+    consecutive_numbers = false
+    numbers = coordinates.map do |coordinate|
+      coordinate[-1] end.sort
 
-    counter = []
-    count = coordinates.length #- 1
-    count.times do
-      counter << count - 1
-      count -= 1
-      counter = counter.sort
-    end
-
-    counter.each do |count|
-      next_val = count + 1
-      while next_val != coordinates.length
-      #return if next_val == coordinates.length
-        @consecutive_letters = true if letters[count] == letters[next_val]
-          #require "pry"; binding.pry
-          #@consecutive_letters = true
-        #else @consecutive_letters = false
-        #end
-        
-      #@consecutive_letters
+      counter = []
+      count = coordinates.length #- 1
+      count.times do
+        counter << count - 1
+        count -= 1
+        counter = counter.sort
       end
-    end
-    @consecutive_letters
+
+      counter.each do |count|
+        next_val = count + 1
+          return consecutive_numbers if next_val == coordinates.length
+          consecutive_numbers = true if numbers[count].to_i + 1 == numbers[next_val].to_i
+          consecutive_numbers = false if numbers[count].to_i + 1 != numbers[next_val].to_i
+      end
+      consecutive_numbers
   end
+
+  # def consecutive_letters?(ship, coordinates)
+  #   letters = coordinates.map do |coordinate|
+  #     coordinate[0] end
+  #
+  #   counter = []
+  #   count = coordinates.length #- 1
+  #   count.times do
+  #     counter << count - 1
+  #     count -= 1
+  #     counter = counter.sort
+  #   end
+  #
+  #   counter.each do |count|
+  #     next_val = count + 1
+  #     while next_val != coordinates.length
+  #     #return if next_val == coordinates.length
+  #       @consecutive_letters = true if letters[count] == letters[next_val]
+  #         #require "pry"; binding.pry
+  #         #@consecutive_letters = true
+  #       #else @consecutive_letters = false
+  #       #end
+  #
+  #     #@consecutive_letters
+  #     end
+  #   end
+  #   @consecutive_letters
+  # end
 
   # def valid_placement?(ship, coordinates)
   #   if ship.length == coordinates.length
