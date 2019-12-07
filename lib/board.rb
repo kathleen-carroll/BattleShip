@@ -5,6 +5,8 @@ class Board
 
   def initialize
     @cells = cell_generator
+
+    @consecutive_numbers = false
     #@consecutive_letters = false
   end
 
@@ -42,7 +44,6 @@ class Board
   end
 
   def consecutive_numbers?(ship, coordinates)
-    consecutive_numbers = false
     numbers = coordinates.map do |coordinate|
       coordinate[-1] end.sort
 
@@ -56,16 +57,16 @@ class Board
 
       counter.each do |count|
         next_val = count + 1
-          return consecutive_numbers if next_val == coordinates.length
-          consecutive_numbers = true if numbers[count].to_i + 1 == numbers[next_val].to_i
-          consecutive_numbers = false if numbers[count].to_i + 1 != numbers[next_val].to_i
+          return @consecutive_numbers if next_val == coordinates.length
+          @consecutive_numbers = true if numbers[count].to_i + 1 == numbers[next_val].to_i
+          @consecutive_numbers = false if numbers[count].to_i + 1 != numbers[next_val].to_i
       end
-      consecutive_numbers
+      @consecutive_numbers
   end
 
   # def consecutive_letters?(ship, coordinates)
   #   letters = coordinates.map do |coordinate|
-  #     coordinate[0] end
+  #     coordinate[0] end.sort
   #
   #   counter = []
   #   count = coordinates.length #- 1
@@ -77,8 +78,7 @@ class Board
   #
   #   counter.each do |count|
   #     next_val = count + 1
-  #     while next_val != coordinates.length
-  #     #return if next_val == coordinates.length
+  #     return @consecutive_letters if next_val == coordinates.length
   #       @consecutive_letters = true if letters[count] == letters[next_val]
   #         #require "pry"; binding.pry
   #         #@consecutive_letters = true
@@ -86,7 +86,6 @@ class Board
   #       #end
   #
   #     #@consecutive_letters
-  #     end
   #   end
   #   @consecutive_letters
   # end
