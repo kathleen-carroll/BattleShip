@@ -60,8 +60,8 @@ class Board
     counter.each do |count|
       next_val = count + 1
         return @same_numbers if next_val == coordinates.length
-        return @same_numbers = false if numbers[count].to_i + 1 != numbers[next_val].to_i
-        @same_numbers = true if numbers[count].to_i + 1 == numbers[next_val].to_i
+        return @same_numbers = false if numbers[count].to_i != numbers[next_val].to_i
+        @same_numbers = true if numbers[count].to_i == numbers[next_val].to_i
     end
 
     @same_numbers
