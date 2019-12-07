@@ -50,7 +50,7 @@ class Board
       coordinate[-1] end.sort
 
     counter = []
-    count = coordinates.length #- 1
+    count = coordinates.length
     count.times do
       counter << count - 1
       count -= 1
@@ -72,7 +72,7 @@ class Board
       coordinate[-1] end.sort
 
       counter = []
-      count = coordinates.length #- 1
+      count = coordinates.length
       count.times do
         counter << count - 1
         count -= 1
@@ -93,7 +93,7 @@ class Board
       coordinate[0] end.sort
 
     counter = []
-    count = coordinates.length #- 1
+    count = coordinates.length
     count.times do
       counter << count - 1
       count -= 1
@@ -115,7 +115,7 @@ class Board
       coordinate[0].ord end.sort
 
     counter = []
-    count = coordinates.length #- 1
+    count = coordinates.length
     count.times do
       counter << count - 1
       count -= 1
@@ -134,31 +134,12 @@ class Board
 
   def valid_placement?(ship, coordinates)
     if ship.length == coordinates.length
-  #     letters = []
-  #     numbers = []
-  #     coordinates.each do |coordinate|
-  #       letters << coordinate[0]
-  #       numbers << coordinate[-1]
-  #     end
-  #     letters
-  #     numbers
-  #     counter = []
-  #     count = coordinates.length #- 1
-  #     count.times do
-  #       counter << count - 1
-  #       count -= 1
-  #       counter = counter.sort
-  #     end
-  #     counter.each do |order_no|
-  #         #require "pry"; binding.pry
-  #       if letters[order_no] == letters[order_no - 1] && numbers[order_no].to_f - 1 == numbers[order_no - 1].to_f
-  #         boolean = true #letters match and numbers are 1 off
-  #       elsif letters[order_no] != letters[order_no - 1] && numbers[order_no] == numbers[order_no - 1]
-  #         boolean = true
-  #       else boolean = false
-  #       end
-  #     end
-  #     #if letters[counter] == letters[counter]
+      if same_letters?(ship, coordinates) == true && consecutive_numbers?(ship, coordinates) == true
+        true
+      elsif same_numbers?(ship, coordinates) == true && consecutive_letters?(ship, coordinates) == true
+        true
+      else false
+      end
     else false
     end
   end
