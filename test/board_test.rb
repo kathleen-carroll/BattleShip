@@ -40,7 +40,7 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.same_numbers?(@cruiser, ["A2", "B2", "D4"])
     assert_equal false, @board.same_numbers?(@cruiser, ["A2", "C1", "B1"])
     assert_equal true, @board.same_numbers?(@cruiser, ["A1", "D1", "B1"])
-    assert_equal true, @board.same_numbers?(@cruiser, ["A1", "D2", "B3"])
+    assert_equal false, @board.same_numbers?(@cruiser, ["A1", "D2", "B3"])
   end
 
 
