@@ -62,6 +62,7 @@ class Board
           #@consecutive_letters = true
         #else @consecutive_letters = false
         #end
+        
       #@consecutive_letters
       end
     end
