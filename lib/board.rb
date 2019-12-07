@@ -7,7 +7,7 @@ class Board
     @cells = cell_generator
 
     @consecutive_numbers = false
-    #@consecutive_letters = false
+    @consecutive_letters = false
   end
 
   def cell_generator
@@ -64,31 +64,31 @@ class Board
       @consecutive_numbers
   end
 
-  # def consecutive_letters?(ship, coordinates)
-  #   letters = coordinates.map do |coordinate|
-  #     coordinate[0] end.sort
-  #
-  #   counter = []
-  #   count = coordinates.length #- 1
-  #   count.times do
-  #     counter << count - 1
-  #     count -= 1
-  #     counter = counter.sort
-  #   end
-  #
-  #   counter.each do |count|
-  #     next_val = count + 1
-  #     return @consecutive_letters if next_val == coordinates.length
-  #       @consecutive_letters = true if letters[count] == letters[next_val]
-  #         #require "pry"; binding.pry
-  #         #@consecutive_letters = true
-  #       #else @consecutive_letters = false
-  #       #end
-  #
-  #     #@consecutive_letters
-  #   end
-  #   @consecutive_letters
-  # end
+  def consecutive_letters?(ship, coordinates)
+    letters = coordinates.map do |coordinate|
+      coordinate[0] end.sort
+
+    counter = []
+    count = coordinates.length #- 1
+    count.times do
+      counter << count - 1
+      count -= 1
+      counter = counter.sort
+    end
+
+    counter.each do |count|
+      next_val = count + 1
+        return @consecutive_letters if next_val == coordinates.length
+        @consecutive_letters = true if letters[count] == letters[next_val]
+          #require "pry"; binding.pry
+          #@consecutive_letters = true
+        #else @consecutive_letters = false
+        #end
+
+      #@consecutive_letters
+    end
+    @consecutive_letters
+  end
 
   # def valid_placement?(ship, coordinates)
   #   if ship.length == coordinates.length
