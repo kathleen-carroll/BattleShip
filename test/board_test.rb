@@ -89,4 +89,10 @@ class BoardTest < Minitest::Test
 
     assert_equal true, @cell3.ship == @cell2.ship
   end
+
+  def test_it_is_not_valid_if_ships_overlap_on_board
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    submarine = Ship.new("Submarine", 2)
+    assert_equal false, @board.valid_placement?(submarine, ["A1", "B1"])
+  end
 end
