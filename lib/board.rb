@@ -180,11 +180,4 @@ end
 
 
 
-  #   render_val = ""
-  #   @cells.each do |coordinate, cell|
-  #   #coordinate = cells.invert[cell]
-  #   # binding.pry
-  #   render_val = cells[coordinate].render
-  #   #binding.pry
-  # end
-  # puts render_val
+  
