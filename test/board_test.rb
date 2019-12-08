@@ -9,8 +9,9 @@ class BoardTest < Minitest::Test
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
-    # @cell_1 = Cell.new("B4")
-    # @cell_2 = Cell.new("C3")
+    @cell1 = @board.cells["A1"]
+    @cell2 = @board.cells["A2"]
+    @cell3 = @board.cells["A3"]
   end
 
   def test_it_exists
@@ -64,7 +65,7 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.consecutive_letters?(@cruiser, ["D2", "C4", "B3"])
   end
 
-  def test_coordinates_are_consecutive
+  def test_coordinates_are_consecutive_not_diagonal_and_valid
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
     #assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
@@ -73,5 +74,19 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
     assert_equal true, @board.valid_placement?(@submarine, ["A1", "A2"])
     assert_equal true, @board.valid_placement?(@cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_ships_can_be_placed_on_board
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+
+    assert_instance_of Cell, @cell1
+    assert_instance_of Cell, @cell2
+    assert_instance_of Cell, @cell3
+
+    assert_instance_of Ship, @cell1.ship
+    assert_instance_of Ship, @cell2.ship
+    assert_instance_of Ship, @cell3.ship
+
+    assert_equal true, @cell3.ship == @cell2.ship
   end
 end
