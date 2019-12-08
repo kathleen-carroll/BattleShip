@@ -10,6 +10,7 @@ class Board
     @consecutive_letters = false
     @same_letters = false
     @same_numbers = false
+    @open_cell = true
   end
 
   def cell_generator
@@ -133,7 +134,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if ship.length == coordinates.length
+    if ship.length == coordinates.length && @open_cell == true
       if same_letters?(ship, coordinates) == true && consecutive_numbers?(ship, coordinates) == true
         true
       elsif same_numbers?(ship, coordinates) == true && consecutive_letters?(ship, coordinates) == true
@@ -148,6 +149,7 @@ class Board
     coordinates.each do |coordinate|
       cell = cells[coordinate]
       cell.place_ship(ship)
+      @open_cell = false #cell.empty? = false
     end
   end
 
