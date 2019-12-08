@@ -112,7 +112,6 @@ class BoardTest < Minitest::Test
                     "D . . . . \n"
     assert_equal expected, @board.render
     assert_equal new_expected, @board.render(true)
-
     end
 
   end
