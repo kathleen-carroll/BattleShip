@@ -20,6 +20,8 @@ class BoardTest < Minitest::Test
 
   def test_board_has_cells
     assert_instance_of Hash, @board.cells
+    assert_equal 16, @board.cells.count
+    assert_instance_of Cell, @board.cells.values.first
   end
 
   def test_coordinates_are_on_board
