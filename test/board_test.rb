@@ -97,4 +97,21 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2)
     assert_equal false, @board.valid_placement?(submarine, ["A1", "B1"])
   end
-end
+
+  def test_board_render
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expected =  "  1 2 3 4 \n" +
+                "A . . . . \n" +
+                "B . . . . \n" +
+                "C . . . . \n" +
+                "D . . . . \n"
+    new_expected = "  1 2 3 4 \n" +
+                    "A S S S . \n" +
+                    "B . . . . \n" +
+                    "C . . . . \n" +
+                    "D . . . . \n"
+    assert_equal expected, @board.render
+    assert_equal new_expected, @board.render(true)
+    end
+
+  end
