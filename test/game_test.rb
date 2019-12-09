@@ -1,0 +1,1 @@
+display_welcome_screen
