@@ -18,16 +18,15 @@ class GameTest < Minitest::Test
   end
 
   def test_game_has_boards
-    assert_instance_of Board, @game.computer_board
+    assert_instance_of Board, @game.cpu_board
     assert_instance_of Board, @game.player_board
   end
 
-  def test_game_creates_valid_computer_board
-    @game.board_generator(@cruiser)
-    #@game.vertical_random_3
-    #@game.vertical_random_2
-    #@game.horizontal_random_3
-    #@game.computer_board_generator
-    # assert_equal true, @computer_board.valid_placement?(@cruiser, )
+  def test_game_creates_valid_cpu_board
+    cpu = @game.cpu_ship_place(@cruiser)
+    assert_equal 3, cpu.length
+    cpu2 = @game.cpu_ship_place(@submarine)
+    assert_equal 2, cpu2.length
+    p @game.cpu_board.render(true)
   end
 end
