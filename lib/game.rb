@@ -4,28 +4,31 @@ require './lib/cell'
 
 class Game
 
-  def initiliaze
-  @board = Board.new
-  end 
+  # def initiliaze
+  # # @player_board = Board.new
+  # # @computer_board = Board.new
+  # # @ships = {
+  # #     cruiser: Ship.new("Cruiser", 3),
+  # #     submarine: Ship.new("Submarine", 2)
+  # end
 
-  def display_welcome_screen
-    p "Welcome to BATTLESHIP.... GAMETIME!"
-    p "Press (p)lay if you dare! \n read the (i)nstructions, or (q)uit?"
-      input = gets.chomp.downcase
-      if input == "p"
-      game_start
-      elsif input == "q"
-      puts "Bye!"
-
-    end
-  end
+  # def display_welcome_screen
+  #   p "Welcome to BATTLESHIP.... GAMETIME!"
+  #   game_start
+  # end
 
   def game_start
-    p "I have laid out my ships on the grid."
-    p "You now need to layout your two ships."
-    p "The Cruiser is three units long and the Submarine is two units long."
-    @board
-    p "Enter the squares for the cruiser:"
-    @coordinates = gets.chomp
+    p "Press (p)lay if you dare! \n read the (i)nstructions, or (q)uit?"
+    selection_input = gets.chomp
+    until selection_input == "p" || selection_input == "q" do
+      if selection_input.downcase == "p"
+        setup #setup method below
+      elsif selection_input.downcase == "q"
+        abort "Goodbye"
+      else
+        puts "Please enter p or q."
+        selection_input = gets.chomp
+      end
+    end
   end
 end
