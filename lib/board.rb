@@ -136,7 +136,12 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if ship.length == coordinates.length && @open_cell == true
+    coordinates.each do |coordinate|
+      return @open_cell = false if cells[coordinate].empty? == false
+      @open_cell = true if cells[coordinate].empty? == true
+    end
+    @open_cell
+    if ship.length == coordinates.length && @open_cell == true #cells[coordinates[ship.length - 1]].empty? == true #
       if same_letters?(ship, coordinates) == true && consecutive_numbers?(ship, coordinates) == true
         true
       elsif same_numbers?(ship, coordinates) == true && consecutive_letters?(ship, coordinates) == true
@@ -151,7 +156,8 @@ class Board
     coordinates.each do |coordinate|
       cell = cells[coordinate]
       cell.place_ship(ship)
-      @open_cell = false #cell.empty? = false
+      #@open_cell = false #
+      #cell.empty = false
     end
   end
 
@@ -171,13 +177,3 @@ class Board
     end
   end
 end
-
-
-
-
-
-
-
-
-
-  
