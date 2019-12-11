@@ -11,6 +11,7 @@ class GameTest < Minitest::Test
   @game = Game.new
   @cruiser = Ship.new("Cruiser", 3)
   @submarine = Ship.new("Submarine", 2)
+  @ships = [@cruiser, @submarine]
   end
 
   def test_it_exists
@@ -28,5 +29,9 @@ class GameTest < Minitest::Test
     cpu2 = @game.cpu_ship_place(@submarine)
     assert_equal 2, cpu2.length
     p @game.cpu_board.render(true)
+  end
+
+  def test_player_can_place_ships
+    @game.player_ship_place(@ships)
   end
 end
