@@ -3,7 +3,6 @@ require "minitest/pride"
 require "./lib/board"
 require "./lib/ship"
 require "./lib/user"
-#require "./lib/cell"
 require "./lib/game"
 require "./lib/turn"
 

@@ -32,7 +32,6 @@ class CellTest < Minitest::Test
     assert_equal false, @cell_1.fired_upon?
 
     @cell_1.fired_upon
-    #require "pry"; binding.pry
     assert_equal true, @cell_1.fired_upon?
     assert_equal 2, @cell_1.ship.health
   end

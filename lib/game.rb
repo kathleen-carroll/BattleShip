@@ -8,6 +8,22 @@ class Game
     @player_board = Board.new
   end
 
+  def welcome_screen
+    p "Welcome to BATTLESHIP....GAMETIME!"
+    p "Press (p)lay if you dare! or (q)uit?"
+    selection_input = gets.chomp
+    until selection_input == "p" || selection_input == "q" do
+      if selection_input.downcase == "p"
+        player_ship_place
+      elsif selection_input.downcase == "q"
+        p "Goodbye"
+      else
+        puts "Please enter p or q."
+        selection_input = gets.chomp
+      end
+    end
+  end
+
   def cpu_ship_place(ship, coordinates =[])
     until @cpu_board.valid_placement?(ship, coordinates) == true
         coordinates = @cpu_board.cells.keys.sample(ship.length)
@@ -25,7 +41,6 @@ class Game
     coordinates = coordinates.split
 
     until @player_board.valid_placement?(ships[0], coordinates)
-      # require "pry"; binding.pry
       puts "Those are invalid coordinates. Please try again:"
       coordinates = gets.chomp
       coordinates = coordinates.split

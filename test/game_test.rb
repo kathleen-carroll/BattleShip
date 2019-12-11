@@ -3,15 +3,14 @@ require "minitest/pride"
 require "./lib/board"
 require "./lib/ship"
 require "./lib/user"
-#require "./lib/cell"
 require "./lib/game"
 
 class GameTest < Minitest::Test
   def setup
-  @game = Game.new
-  @cruiser = Ship.new("Cruiser", 3)
-  @submarine = Ship.new("Submarine", 2)
-  @ships = [@cruiser, @submarine]
+    @game = Game.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @ships = [@cruiser, @submarine]
   end
 
   def test_it_exists
