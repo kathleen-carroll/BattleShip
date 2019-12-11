@@ -6,4 +6,4 @@ require './lib/game'
 
 @game = Game.new
 
-@game.game_setup
+@game.player_ship_place
