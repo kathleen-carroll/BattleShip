@@ -1,5 +1,6 @@
 require './lib/board'
 
+attr_reader :cpu_board, :player_board
 class Game
 
   def initialize
