@@ -1,12 +1,11 @@
 require './lib/board'
 
 class Game
+  attr_reader :cpu_board, :player_board
 
   def initialize
-    @player_board = Board.new
     @cpu_board = Board.new
-    @player_cruiser = Ship.new("Cruiser", 3)
-    @player_submarine = Ship.new("Submarine", 2)
+    @player_board = Board.new
   end
 
   def welcome_screen
@@ -25,30 +24,37 @@ class Game
     end
   end
 
-  def player_ship_place
-    p "I have laid out my ships on the grid"
-    p "You now need to lay out your two ships."
-    p "The Cruiser is three units long and the Submarine is two units long."
-    puts @player_board.render(true)
-    p "Enter the coordinates for the cruiser: Use the format A1 A2 A3 (3 spaces)"
-    loop do
-      ship = @player_cruiser
-      ship_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
-      until @player_board.valid_placement?(ship, ship_placement) == true
-        puts "The coordinates you entered are invalid! Please try again."
-        ship_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
-      end
-        @player_board.place(@player_cruiser, ship_placement)
-        puts @player_board.render(true)
-        p "Now enter the coordinates for the submarine: Use the same format from above (2 spaces)"
-        ship = @player_submarine
-        ship_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
-        until @player_board.valid_placement?(ship, ship_placement) == true
-          puts "The coordinates you entered are invalid! Please try again."
-          ship_placement = gets.chomp.upcase.gsub(" ", ",").split(",")
-        end
-        @player_board.place(@player_submarine, ship_placement)
-        puts @player_board.render(true)
-      end
+  def cpu_ship_place(ship, coordinates =[])
+    until @cpu_board.valid_placement?(ship, coordinates) == true
+        coordinates = @cpu_board.cells.keys.sample(ship.length)
     end
+    @cpu_board.place(ship, coordinates)
   end
+
+  def player_ship_place(ships)
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your #{ships.length} ships."
+    puts "The #{ships[0].name} is #{ships[0].length} units long and the #{ships[-1].name} is #{ships[-1].length} units long."
+    puts @player_board.render(true)
+    puts "Enter the squares for the #{ships[0].name} (#{ships[0].length}):"
+    coordinates = gets.chomp
+    coordinates = coordinates.split
+
+    until @player_board.valid_placement?(ships[0], coordinates)
+      puts "Those are invalid coordinates. Please try again:"
+      coordinates = gets.chomp
+      coordinates = coordinates.split
+    end
+    @player_board.place(ships[0], coordinates)
+    puts @player_board.render(true)
+
+    puts "Enter the squares for the #{ships[-1].name} (#{ships[-1].length}):"
+    coordinates = gets.chomp
+    until @player_board.valid_placement?(ships[-1], coordinates.split) == true
+      puts "Those are invalid coordinates. Please try again:"
+      coordinates = gets.chomp
+    end
+    @player_board.place(ships[-1], coordinates.split)
+    puts @player_board.render(true)
+  end
+end
