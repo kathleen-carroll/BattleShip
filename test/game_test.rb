@@ -1,32 +1,16 @@
 require "minitest/autorun"
 require "minitest/pride"
-<<<<<<< HEAD
-require "./lib/ship"
-require "./lib/cell"
-require "./lib/board"
-require "./lib/game"
-
-class GameTest < Minitest::Test
-
-  def setup
-    @game = Game.new
-  end
-
-  def test_it_exists
-    assert_instance_of Board, @game.cpu_board
-=======
 require "./lib/board"
 require "./lib/ship"
 require "./lib/user"
-#require "./lib/cell"
 require "./lib/game"
 
 class GameTest < Minitest::Test
   def setup
-  @game = Game.new
-  @cruiser = Ship.new("Cruiser", 3)
-  @submarine = Ship.new("Submarine", 2)
-  @ships = [@cruiser, @submarine]
+    @game = Game.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @ships = [@cruiser, @submarine]
   end
 
   def test_it_exists
@@ -48,6 +32,5 @@ class GameTest < Minitest::Test
 
   def test_player_can_place_ships
     @game.player_ship_place(@ships)
->>>>>>> e1a331c2f4fb4becf3ad4d160f8435686d8ecf5d
   end
 end

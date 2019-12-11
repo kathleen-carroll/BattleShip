@@ -1,12 +1,10 @@
 require "./lib/cell"
-require 'pry'
 
 class Board
   attr_reader :cells
 
   def initialize
     @cells = cell_generator
-
     @consecutive_numbers = false
     @consecutive_letters = false
     @same_letters = false
