@@ -2,7 +2,6 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/board"
 require "./lib/ship"
-#require "./lib/cell"
 
 class BoardTest < Minitest::Test
   def setup
