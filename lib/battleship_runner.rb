@@ -1,9 +1,9 @@
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
+require './lib/game'
 
 
+@game = Game.new
 
-
-def start
-end
+@game.game_setup
