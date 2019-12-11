@@ -12,7 +12,7 @@ class Board
     @same_letters = false
     @same_numbers = false
     @open_cell = true
-    #@render_val = ""
+    @on_board = true
   end
 
   def cell_generator
@@ -137,14 +137,17 @@ class Board
 
   def valid_placement?(ship, coordinates)
     coordinates.each do |coordinate|
+      return @on_board = false if validate_coordinate?(coordinate) == false
       return @open_cell = false if cells[coordinate].empty? == false
-      @open_cell = true if cells[coordinate].empty? == true
+      @open_cell = true if cells[coordinate].empty?
+      @on_board = true if validate_coordinate?(coordinate)
     end
     @open_cell
-    if ship.length == coordinates.length && @open_cell == true #cells[coordinates[ship.length - 1]].empty? == true #
-      if same_letters?(ship, coordinates) == true && consecutive_numbers?(ship, coordinates) == true
+    @on_board
+    if ship.length == coordinates.length && @open_cell && @on_board
+      if same_letters?(ship, coordinates) && consecutive_numbers?(ship, coordinates)
         true
-      elsif same_numbers?(ship, coordinates) == true && consecutive_letters?(ship, coordinates) == true
+      elsif same_numbers?(ship, coordinates) && consecutive_letters?(ship, coordinates)
         true
       else false
       end
@@ -156,24 +159,14 @@ class Board
     coordinates.each do |coordinate|
       cell = cells[coordinate]
       cell.place_ship(ship)
-      #@open_cell = false #
-      #cell.empty = false
     end
   end
 
   def render(boolean = false)
-    if boolean == true
       "  1 2 3 4 \n" +
-      "A " + cells["A1"].render(true) + " " + cells["A2"].render(true) + " " + cells["A3"].render(true) + " " + cells["A4"].render(true) +  " \n" +
-      "B " + cells["B1"].render(true) + " " + cells["B2"].render(true) + " " + cells["B3"].render(true) + " " + cells["B4"].render(true) + " \n" +
-      "C " +  cells["C1"].render(true) + " " + cells["C2"].render(true) + " " + cells["C3"].render(true) + " " + cells["C4"].render(true) + " \n" +
-      "D " + cells["D1"].render(true) + " " +  cells["D2"].render(true) + " " + cells["D3"].render(true) + " " + cells["D4"].render(true) + " \n"
-    else
-      "  1 2 3 4 \n" +
-      "A " + cells["A1"].render + " " + cells["A2"].render + " " + cells["A3"].render + " " + cells["A4"].render +  " \n" +
-      "B " + cells["B1"].render + " " + cells["B2"].render + " " + cells["B3"].render + " " + cells["B4"].render + " \n" +
-      "C " +  cells["C1"].render + " " + cells["C2"].render + " " + cells["C3"].render + " " + cells["C4"].render + " \n" +
-      "D " + cells["D1"].render + " " +  cells["D2"].render + " " + cells["D3"].render + " " + cells["D4"].render + " \n"
-    end
+      "A " + cells["A1"].render(boolean) + " " + cells["A2"].render(boolean) + " " + cells["A3"].render(boolean) + " " + cells["A4"].render(boolean) +  " \n" +
+      "B " + cells["B1"].render(boolean) + " " + cells["B2"].render(boolean) + " " + cells["B3"].render(boolean) + " " + cells["B4"].render(boolean) + " \n" +
+      "C " +  cells["C1"].render(boolean) + " " + cells["C2"].render(boolean) + " " + cells["C3"].render(boolean) + " " + cells["C4"].render(boolean) + " \n" +
+      "D " + cells["D1"].render(boolean) + " " +  cells["D2"].render(boolean) + " " + cells["D3"].render(boolean) + " " + cells["D4"].render(boolean) + " \n"
   end
 end
