@@ -1,26 +1,33 @@
 require './lib/board'
+require './lib/ship'
 
 class Game
   attr_reader :cpu_board, :player_board
+  attr_accessor :ships
 
   def initialize
     @cpu_board = Board.new
     @player_board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @ships = [@cruiser, @submarine]
   end
 
   def welcome_screen
     p "Welcome to BATTLESHIP....GAMETIME!"
     p "Press (p)lay if you dare! or (q)uit?"
     selection_input = gets.chomp
-    until selection_input == "p" || selection_input == "q" do
-      if selection_input.downcase == "p"
-        player_ship_place
-      elsif selection_input.downcase == "q"
-        p "Goodbye"
-      else
-        puts "Please enter p or q."
-        selection_input = gets.chomp
-      end
+    until selection_input == "p" || selection_input == "q"
+      puts "Please enter p or q."
+      selection_input = gets.chomp
+    end
+
+    if selection_input.downcase == "p"
+      cpu_ship_place(@cruiser)
+      cpu_ship_place(@submarine)
+      player_ship_place(@ships)
+    elsif selection_input.downcase == "q"
+      p "Goodbye"
     end
   end
 

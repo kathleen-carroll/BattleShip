@@ -2,7 +2,6 @@ require "minitest/autorun"
 require "minitest/pride"
 require "./lib/board"
 require "./lib/ship"
-require "./lib/user"
 require "./lib/game"
 require "./lib/turn"
 
@@ -33,7 +32,17 @@ class TurnTest < Minitest::Test
     @turn.player_render(@game.cpu_board, @game.player_board)
   end
 
+  def test_player_win_game_after_taking_shot
+    skip
+    @game.cpu_ship_place(@cruiser)
+    @game.cpu_ship_place(@submarine)
+    @turn.player_shot(@game.cpu_board, @game.player_board)
+
+    @turn.player_win_game?(@game.cpu_board, @game.player_board)
+  end
+
   def test_cpu_shot_and_board_shows_player_where_their_board_was_shot
+    skip
     @game.player_ship_place(@ships)
     @turn.cpu_shot(@game.cpu_board, @game.player_board)
     @turn.cpu_render(@game.cpu_board, @game.player_board)
