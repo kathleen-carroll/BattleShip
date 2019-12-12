@@ -3,6 +3,8 @@ class Turn
 
   def initialize
     @turn = turn
+    @player_status = []
+    @cpu_status = []
   end
 
   def current_board_info(cpu_board, player_board)
@@ -31,6 +33,20 @@ class Turn
   end
 
   def player_win_game?(cpu_board, player_board)
+    full_cells = []
+    cpu_board.cells.find_all do |cell|
+      if cell[-1].ship != nil
+        full_cells << cell[0]
+      end
+    end
+
+    full_cells.each do |coordinate|
+      @player_status << cpu_board.cells[coordinate].ship.sunk?
+    end
+
+    if @player_status.uniq == [true]
+      game_over
+    end
     #iterate over all cells of cpu board and find where ship != nil
     #iterate over the array of all cells that have ships and
     #see if ships are sunk, if they are exit the game
@@ -66,6 +82,31 @@ class Turn
     puts player_board.render(true)
   end
 
+  def cpu_win_game?(cpu_board, player_board)
+    full_cells = []
+    player_board.cells.find_all do |cell|
+      if cell[-1].ship != nil
+        full_cells << cell[0]
+      end
+    end
+
+    full_cells.each do |coordinate|
+      @cpu_status << player_board.cells[coordinate].ship.sunk?
+    end
+    if @cpu_status.uniq == [true]
+      game_over
+    end
+    #iterate over all cells of cpu board and find where ship != nil
+    #iterate over the array of all cells that have ships and
+    #see if ships are sunk, if they are exit the game
+  end
+
+  def game_over
+    if @player_status.uniq == [true]
+      puts "You beat the computer!!! Victory!!!"
+    else "I won! Better luck next time."
+    end
+  end
 
 
   #exit game turn is over once one player sinks all the ships
